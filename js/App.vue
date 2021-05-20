@@ -1,14 +1,18 @@
 <template>
-    <div id="app" class="wrapper"> 
+    <div id="app" > 
         <Header/>
+        <Slider/>
     </div>
 </template>
 
 <script>
-import Header from 'firebase/app'
+import Header from './components/Header.vue'
+import Slider from './components/Slider.vue'
 export default {
-    setup() {
-        
+    name: 'App',
+    components: {
+        Header,
+        Slider
     },
 }
 </script>
