@@ -185,12 +185,10 @@ a {
     padding: 0;
     opacity: .7;
     margin: 0 5px 0 5px;
-}
-
-.circle:hover {
-    background-color: #fff;
-}
-
-.circle-active {
-    background-color: #3d3b3b;
+    &:hover {
+        background-color: #fff;
+    }
+    &-active {
+        background-color: #3d3b3b;
+    }
 }
