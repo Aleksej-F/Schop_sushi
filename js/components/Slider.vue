@@ -62,7 +62,8 @@ export default {
             leftDown:0,
             activeNav:[{id:0, q:true},{id:1,q:false},{id:2,q:false}],
             activeNavC: 0,
-            slidePosition:[]  
+            slidePosition:[],
+            timerId:'' 
         }
     },
     mounted() {
@@ -74,6 +75,7 @@ export default {
             [-this.widthSlide,0,this.widthSlide],
             [this.widthSlide,-this.widthSlide,0]
         ]
+        this.animate();
     },
 
     methods: {
@@ -203,9 +205,21 @@ export default {
         },
 
         clickNav(e){
-            console.dir(e.target.attributes['data-n'].textContent)
-            const aktive = e.target.attributes['data-n'].textContent
-            //.attributes.data-n.textContent
+           let aktive = 0
+
+            if (e !== undefined){
+                 console.dir(e.target.attributes['data-n'].textContent)
+                 aktive = e.target.attributes['data-n'].textContent
+            } else {
+                
+                if (this.activeNavC === this.activeNav.length-1) {
+                   aktive = 0
+                } else { aktive = this.activeNavC + 1}
+                 
+                
+            }
+            console.log('aktive', aktive)
+           
             if ( !this.activeNav[aktive].q) {  
                 switch(aktive) {
                     case '0':
@@ -214,17 +228,14 @@ export default {
                             console.log('да');
                             this.leftSlaidNull.a = this.widthSlide;
                             this.leftSlaidNull.c = -this.widthSlide;
-                        }
-
-
-                        
+                        };
                         break;
                     case '1':
                         console.log('нажал 1');
                         if ( this.activeNav[2].q) {
                             console.log('да');
                             this.leftSlaidNull.b = this.widthSlide;
-                            this.leftSlaidNull.a = -this.widthSlide;}
+                            this.leftSlaidNull.a = -this.widthSlide;};
                         break;
                     case '2':
                         console.log('нажал 2');
@@ -232,24 +243,21 @@ export default {
                             console.log('да');
                             this.leftSlaidNull.c = this.widthSlide;
                             this.leftSlaidNull.b = -this.widthSlide;
-                        }
+                        };
                         break;
                     
 
                 }
-                
-                
+                                
                 this.activeNav[this.activeNavC].q = !this.activeNav[this.activeNavC].q
                 this.activeNavC = Number(aktive)
                 this.activeNav[this.activeNavC].q = !this.activeNav[this.activeNavC].q
-                console.log(this.leftSlaid)
-                   
-                
+               
                 const p =  new Promise((resolve)=>{
 			        this.down()
 				    setTimeout(() => {resolve()}, 100)
-			
-		        })
+			    })
+                
                 p.then(()=>{ 
                     this.leftSlaid.a={
                         left : this.leftSlaidNull.a - this.widthSlide +  'px',
@@ -263,8 +271,7 @@ export default {
                         left : this.leftSlaidNull.c - this.widthSlide +  'px',
                         transition: 'left .8s cubic-bezier(1.0, 0.5, 0.8, 1.0)'
                     }
-
-                     setTimeout(() => {
+                    setTimeout(() => {
                         this.leftSlaidNull.a = this.slidePosition[aktive][0]
                         this.leftSlaidNull.b = this.slidePosition[aktive][1]
                         this.leftSlaidNull.c = this.slidePosition[aktive][2]
@@ -272,6 +279,16 @@ export default {
                 })
             }
         },
+
+        animate () {
+
+            this.timerId = setInterval(() => {
+               
+                console.log('имитация animazii ' )
+                this.clickNav()
+            }, 10000)
+
+        }
         
     },
 }

@@ -6,11 +6,14 @@
             </a>
            <div  class="header__tis">
                 <div  class="header__tis-container">
-                    <div class="header__tis-caption">ВКУСНАЯ ЯПОНСКАЯ, ИТАЛЬЯНСКАЯ И КИТАЙСКАЯ КУХНЯ</div>
-                    <div class="header__tis-content">
-                        <a href="">Режим работы</a>
-                        • 
-                        <a href="">О компании</a>
+                    <div class="header__tis-logo"></div>
+                    <div>
+                        <div class="header__tis-caption">ВКУСНАЯ ЯПОНСКАЯ, ИТАЛЬЯНСКАЯ И КИТАЙСКАЯ КУХНЯ</div>
+                        <div class="header__tis-content">
+                            <a href="">Режим работы</a>
+                            • 
+                            <a href="">О компании</a>
+                        </div>
                     </div>
                 </div>
            </div>
