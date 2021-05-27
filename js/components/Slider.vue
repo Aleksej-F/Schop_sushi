@@ -75,16 +75,12 @@ export default {
             [-this.widthSlide,0,this.widthSlide],
             [this.widthSlide,-this.widthSlide,0]
         ]
-        this.animate();
+        this.animateTime();
     },
 
     methods: {
         down(e)  {
-            
-            //console.log(e)  
-
-           // console.log(window.innerWidth)
-            
+           
                 console.log('нажал кнопку мыши')  
                 if (e !== undefined){
                     this.downPrizn = true
@@ -92,20 +88,7 @@ export default {
                     console.log(this.leftDown)
                 }
 
-                this.leftSlaid.a={
-                            left : this.leftSlaidNull.a  +  'px',
-                            transition: ''
-                }
-                this.leftSlaid.b={
-                            left : this.leftSlaidNull.b  +  'px',
-                            transition: ''
-                }
-                this.leftSlaid.c={
-                            left :this.leftSlaidNull.c  +  'px',
-                            transition: ''
-                }
-
-           
+                this.addAnimation(0,'')
 
         },
 
@@ -126,27 +109,14 @@ export default {
                     } else {this.activeNavC++}
                     
                     this.activeNav[this.activeNavC].q = !this.activeNav[this.activeNavC].q
-                    
-                    this.leftSlaid.a={
-                        left : this.leftSlaidNull.a - this.widthSlide +  'px',
-                        transition: 'left .8s cubic-bezier(1.0, 0.5, 0.8, 1.0)'
-                    }
-                    this.leftSlaid.b={
-                        left : this.leftSlaidNull.b - this.widthSlide +  'px',
-                        transition: 'left .8s cubic-bezier(1.0, 0.5, 0.8, 1.0)'
-                    }
-                    this.leftSlaid.c={
-                        left :this.leftSlaidNull.c - this.widthSlide +  'px',
-                        transition: 'left .8s cubic-bezier(1.0, 0.5, 0.8, 1.0)'
-                    }
-                                       
+                    this.addAnimation(-this.widthSlide,'left .8s cubic-bezier(1.0, 0.5, 0.8, 1.0)')
+                                                           
                     setTimeout(() => {
                         this.leftSlaidNull.a = Number(this.leftSlaid.a.left.slice(0 , -2)) < -this.widthSlide ? this.widthSlide : Number(this.leftSlaid.a.left.slice(0 , -2))
                         this.leftSlaidNull.b = Number(this.leftSlaid.b.left.slice(0 , -2)) < -this.widthSlide ? this.widthSlide : Number(this.leftSlaid.b.left.slice(0 , -2))
                         this.leftSlaidNull.c = Number(this.leftSlaid.c.left.slice(0 , -2)) < -this.widthSlide ? this.widthSlide : Number(this.leftSlaid.c.left.slice(0 , -2))
                     }, 800);
-
-                    
+    
                 } else {
                     console.log('leftSlaid>0')
                    
@@ -155,44 +125,36 @@ export default {
                     } else {this.activeNavC--}
                     
                     this.activeNav[this.activeNavC].q = !this.activeNav[this.activeNavC].q
-
-                    this.leftSlaid.a={
-                        left : this.leftSlaidNull.a + this.widthSlide +  'px',
-                        transition: 'left .8s cubic-bezier(1.0, 0.5, 0.8, 1.0)'
-                    }
-                    this.leftSlaid.b={
-                        left : this.leftSlaidNull.b + this.widthSlide +  'px',
-                        transition: 'left .8s cubic-bezier(1.0, 0.5, 0.8, 1.0)'
-                    }
-                    this.leftSlaid.c={
-                        left :this.leftSlaidNull.c + this.widthSlide +  'px',
-                        transition: 'left .8s cubic-bezier(1.0, 0.5, 0.8, 1.0)'
-                    }
-                                        
+                    this.addAnimation(this.widthSlide,'left .8s cubic-bezier(1.0, 0.5, 0.8, 1.0)')
+                    
                     setTimeout(() => {
                         this.leftSlaidNull.a = Number(this.leftSlaid.a.left.slice(0 , -2)) > this.widthSlide ? -this.widthSlide : Number(this.leftSlaid.a.left.slice(0 , -2))
                         this.leftSlaidNull.b = Number(this.leftSlaid.b.left.slice(0 , -2)) > this.widthSlide ? -this.widthSlide : Number(this.leftSlaid.b.left.slice(0 , -2))
                         this.leftSlaidNull.c = Number(this.leftSlaid.c.left.slice(0 , -2)) > this.widthSlide ? -this.widthSlide : Number(this.leftSlaid.c.left.slice(0 , -2))
                        
                     }, 800);
-
-                   
+   
                 }
-
-                
             }else{
-                this.leftSlaid.a={
-                    left:this.leftSlaidNull.a +  'px',
-                    transition: 'left .8s cubic-bezier(1.0, 0.5, 0.8, 1.0)'}
-                this.leftSlaid.b={
-                    left:this.leftSlaidNull.b +  'px',
-                    transition: 'left .8s cubic-bezier(1.0, 0.5, 0.8, 1.0)'}
-                this.leftSlaid.c={
-                    left:this.leftSlaidNull.c +  'px',
-                    transition: 'left .8s cubic-bezier(1.0, 0.5, 0.8, 1.0)'}
-
+                this.addAnimation(0,'left .8s cubic-bezier(1.0, 0.5, 0.8, 1.0)')
+                
             }
             this.changeLeft = 0
+        },
+
+        addAnimation(w,t) {
+            this.leftSlaid.a={
+                left : this.leftSlaidNull.a + w +  'px',
+                transition: t
+            }
+            this.leftSlaid.b={
+                left : this.leftSlaidNull.b + w +  'px',
+                transition: t
+            }
+            this.leftSlaid.c={
+                left :this.leftSlaidNull.c + w +  'px',
+                transition: t
+            }
         },
 
         mousemove(e){
@@ -259,18 +221,8 @@ export default {
 			    })
                 
                 p.then(()=>{ 
-                    this.leftSlaid.a={
-                        left : this.leftSlaidNull.a - this.widthSlide +  'px',
-                        transition: 'left .8s cubic-bezier(1.0, 0.5, 0.8, 1.0)'
-                    }
-                    this.leftSlaid.b={
-                        left : this.leftSlaidNull.b - this.widthSlide +  'px',
-                        transition: 'left .8s cubic-bezier(1.0, 0.5, 0.8, 1.0)'
-                    }
-                    this.leftSlaid.c={
-                        left : this.leftSlaidNull.c - this.widthSlide +  'px',
-                        transition: 'left .8s cubic-bezier(1.0, 0.5, 0.8, 1.0)'
-                    }
+                    this.addAnimation(-this.widthSlide,'left .8s cubic-bezier(1.0, 0.5, 0.8, 1.0)')
+                    
                     setTimeout(() => {
                         this.leftSlaidNull.a = this.slidePosition[aktive][0]
                         this.leftSlaidNull.b = this.slidePosition[aktive][1]
@@ -280,7 +232,7 @@ export default {
             }
         },
 
-        animate () {
+        animateTime () {
 
             this.timerId = setInterval(() => {
                
